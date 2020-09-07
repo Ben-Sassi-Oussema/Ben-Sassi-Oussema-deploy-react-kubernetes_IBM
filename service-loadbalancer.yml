@@ -1,14 +1,13 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-name: scores-service-lb
-labels:
-   app: scores-service-lb
+  name: my-react-loadbalancer
 spec:
-   type: LoadBalancer
-   ports:
-   - port: 80
-     targetPort: 3000
-     name: score-http
-   selector:
-     app: my-react-app
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      nodePort: 31000
+  selector:
+    app: my-react-app
