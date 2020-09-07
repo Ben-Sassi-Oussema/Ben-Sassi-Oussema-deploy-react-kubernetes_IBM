@@ -1,16 +1,21 @@
-apiVersion:  apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
-  name: deploy-react-kubernetes-deployment
+  name: my-react-app
 spec:
-  replicas: 1
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-react-app
   template:
     metadata:
       labels:
-        app: app
+        app: my-react-app
     spec:
       containers:
-      - name: sofia
-        image: oussema1994/sofia:{{BUILD_NUMBER}}
-        ports:
-        - containerPort: 3000
+        - name: my-react-app
+          image: oussema1994/sofia:{{BUILD_NUMBER}}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
